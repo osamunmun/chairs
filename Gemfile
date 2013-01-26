@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'foreman'
 gem 'unicorn'
+gem 'rake',        '~> 10.0.3'
 gem 'rails',       '3.2.11'
 gem 'bcrypt-ruby', '~> 3.0.0'
 
