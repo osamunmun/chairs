@@ -22,7 +22,7 @@
 * config/unicorn.rb
 * current/.env is copied from shared/.env at `deploy:set_dot_env` task after `deploy:create:symlink`
 
-``\
+```
 % cd chairs
 % cp .env.sample .env #=> copy as .env
 % (edit .env for DEPLOY_USER, DEPLOY_HOST etc.)
