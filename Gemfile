@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'foreman'
-gem 'thin'
+gem 'unicorn'
 gem 'rails',       '3.2.11'
 gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -14,6 +14,10 @@ group :assets do
 end
 
 group :development do
+  gem 'thin'
+  gem 'capistrano'
+  gem 'capistrano-ext'
+  gem 'capistrano_colors'
   gem 'haml-rails'
   gem 'sqlite3'
   gem 'wirble'
