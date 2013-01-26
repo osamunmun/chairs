@@ -4,16 +4,17 @@
 worker_processes 5
 preload_app true
 
-APP_PATH = "/usr/share/nginx/www"
-working_directory "#{APP_PATH}/current"
+ROOT_PATH = "/usr/share/nginx/www"
+APP_PATH  = "#{ROOT_PATH}/current"
+working_directory APP_PATH
 
-shared_path = "#{APP_PATH}/shared"
+shared_path = "#{ROOT_PATH}/shared"
 stderr_path "#{shared_path}/log/unicorn.stderr.log"
 stdout_path "#{shared_path}/log/unicorn.stdout.log"
-listen      "#{working_directory}/tmp/unicorn.sock"
-pid         "#{working_directory}/tmp/pids/unicorn.pid"
+listen      "#{APP_PATH}/tmp/unicorn.sock"
+pid         "#{APP_PATH}/tmp/pids/unicorn.pid"
 
-GC.copy_on_write_friendly = true
+GC.copy_on_write_friendly = true if GC.respond_to?(:copy_on_write_friendly=)
 
 before_fork do |server, worker|
   defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!

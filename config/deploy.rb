@@ -25,21 +25,26 @@ role :app, ENV['PRODUCTION_SERVER']
 role :db,  ENV['PRODUCTION_SERVER'], :primary => true
 #role :db,  ""
 
-after "deploy:restart", "deploy:cleanup"
 
-# deploy (unicorn)
+after "deploy:create_symlink", "deploy:set_dot_env"
+after "deploy:restart",        "deploy:cleanup"
+
+# deploy (unicorn via foreman)
 namespace :deploy do
   task :start, :roles => :app do
     run "cd #{current_path}; bundle exec foreman start web-production"
   end
   task :restart, :roles => :app do
-    current_pid = "#{deploy_to}/current/tmp/pids/unicorn.pid"
+    current_pid = "#{current_path}/tmp/pids/unicorn.pid"
     if File.exist? current_pid
       run "kill -s USR2 `cat #{current_pid}`"
     end
   end
   task :stop, :roles => :app do
     run "kill -s QUIT `cat #{current_pid}`"
+  end
+  task :set_dot_env, :roles => :app do
+    run "cp #{shared_path}/.env #{current_path}/"
   end
 end
 
