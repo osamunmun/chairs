@@ -51,10 +51,10 @@ end
 # assets
 namespace :assets do
   task :precompile, :roles => :web do
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} rake assets:precompile"
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile"
   end
   task :cleanup, :roles => :web do
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} rake assets:clean"
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean"
   end
 end
 after :deploy, "assets:precompile"
