@@ -32,7 +32,7 @@ after "deploy:restart",        "deploy:cleanup"
 # deploy (unicorn via foreman)
 namespace :deploy do
   task :start, :roles => :app do
-    run "cd #{current_path}; bundle exec foreman start web-production"
+    run "cd #{current_path}; bundle exec foreman run unicorn_rails -c config/unicorn.rb -E production -D"
   end
   task :restart, :roles => :app do
     current_pid = "#{current_path}/tmp/pids/unicorn.pid"
@@ -41,6 +41,7 @@ namespace :deploy do
     end
   end
   task :stop, :roles => :app do
+    current_pid = "#{current_path}/tmp/pids/unicorn.pid"
     run "kill -s QUIT `cat #{current_pid}`"
   end
   task :set_dot_env, :roles => :app do
