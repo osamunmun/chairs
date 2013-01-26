@@ -159,6 +159,7 @@ DEPENDENCIES
   capistrano_colors
   coffee-rails (~> 3.2.1)
   foreman
+  haml
   haml-rails
   jquery-rails
   pg
