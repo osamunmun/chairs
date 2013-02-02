@@ -27,4 +27,5 @@ group :development do
   gem 'haml-rails'
   gem 'sqlite3'
   gem 'pry'
+  gem 'rspec'
 end
