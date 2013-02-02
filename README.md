@@ -28,7 +28,7 @@
 % (edit .env for DEPLOY_USER, DEPLOY_HOST etc.)
 % bundle exec foreman run cap deploy #=> deploy to production (assets:precompile and unicorn:restart tasks are also called)
 (shortcut)
-% bundle exec foreman deploy
+% bundle exec foreman run deploy
 ```
 
 #### unicorn tasks
