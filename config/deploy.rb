@@ -49,8 +49,7 @@ namespace :unicorn do
   desc 'start unicorn via foreman'
   task :start, :roles => :app do
     run <<-CMD
-      cd #{current_path};
-      bundle exec foreman run unicorn_rails -c config/unicorn.rb -E #{rails_env} -D
+      cd #{current_path} && bundle exec foreman start web_production
     CMD
   end
   desc 'restart unicorn via foreman'
@@ -59,8 +58,7 @@ namespace :unicorn do
       run "kill `cat #{current_pid}`"
     end
     run <<-CMD
-      cd #{current_path};
-      bundle exec foreman run unicorn_rails -c config/unicorn.rb -E #{rails_env} -D
+      cd #{current_path} && bundle exec foreman start web_production
     CMD
   end
   desc 'reload unicorn with `kill -s USR2`'
