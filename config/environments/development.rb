@@ -34,4 +34,7 @@ Chairs::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # time zone
+  config.time_zone = 'Tokyo'
 end
