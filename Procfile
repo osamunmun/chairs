@@ -1,2 +1,3 @@
 web:       rails s thin -p $PORT
-job-venue: rake sq:venue
+job_venue: rake sq:venue
+job_herenow: rake --trace sq:herenow 

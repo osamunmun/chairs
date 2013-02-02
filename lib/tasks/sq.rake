@@ -11,7 +11,11 @@ namespace :sq do
   task :venue do
     Net::HTTP.version_1_2
     @http = create_http_client
-    get_venues()['response']['venues'].to_a.each {|venue|
+    @venues = get_venues()
+  end
+  desc "forsquareからhereNowを取得する"
+  task :herenow => [:venue] do
+    @venues['response']['venues'].to_a.each {|venue|
       id = venue['id']
       name = venue['name']
       if name.include?("大井町") || name.include?("品川")
