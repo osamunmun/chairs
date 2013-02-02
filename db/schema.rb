@@ -11,16 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130202091348) do
+ActiveRecord::Schema.define(:version => 20130202105038) do
 
-  create_table "chairs", :force => true do |t|
-    t.string  "venues_id"
-    t.string  "venues_name"
-    t.string  "venues_image_url"
-    t.string  "location"
-    t.integer "num_herenow"
-    t.integer "num_seats"
-    t.boolean "flg_full"
+  create_table "cafes", :force => true do |t|
+    t.string   "name"
+    t.string   "image"
+    t.text     "location"
+    t.integer  "herenow"
+    t.boolean  "full"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

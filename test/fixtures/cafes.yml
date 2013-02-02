@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: MyString
+  name: MyString
+  image: MyString
+  location: MyText
+  herenow: 1
+  full: false
+
+two:
+  id: MyString
+  name: MyString
+  image: MyString
+  location: MyText
+  herenow: 1
+  full: false
