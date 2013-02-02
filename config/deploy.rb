@@ -25,29 +25,39 @@ role :app, ENV['PRODUCTION_SERVER']
 role :db,  ENV['PRODUCTION_SERVER'], :primary => true
 #role :db,  ""
 
-
-after "deploy:create_symlink", "deploy:set_dot_env"
-after "deploy:restart",        "deploy:cleanup"
-
 # deploy (unicorn via foreman)
-namespace :deploy do
+set :current_pid, "#{current_path}/tmp/pids/unicorn.pid"
+namespace :unicorn do
   task :start, :roles => :app do
-    run "cd #{current_path}; bundle exec foreman run unicorn_rails -c config/unicorn.rb -E production -D"
+    run <<-CMD
+      cd #{current_path};
+      bundle exec foreman run unicorn_rails -c config/unicorn.rb -E production -D
+    CMD
   end
   task :restart, :roles => :app do
-    current_pid = "#{current_path}/tmp/pids/unicorn.pid"
-    if File.exist? current_pid
-      run "kill -s USR2 `cat #{current_pid}`"
-    end
+    run "kill `cat #{current_pid}`"
+    run <<-CMD
+      cd #{current_path};
+      bundle exec foreman run unicorn_rails -c config/unicorn.rb -E production -D
+    CMD
+  end
+  task :reload, :roles => :app do
+    run "kill -s USR2 `cat #{current_pid}`"
   end
   task :stop, :roles => :app do
-    current_pid = "#{current_path}/tmp/pids/unicorn.pid"
+    run "kill `cat #{current_pid}`"
+  end
+  task :graceful_stop, :roles => :app do
     run "kill -s QUIT `cat #{current_pid}`"
   end
   task :set_dot_env, :roles => :app do
     run "cp #{shared_path}/.env #{current_path}/"
   end
 end
+after "deploy:create_symlink", "unicorn:set_dot_env"
+after "deploy:start",          "unicorn:start"
+after "deploy:stop",           "unicorn:stop"
+after "deploy:restart",        "unicorn:restart"
 
 # assets
 namespace :assets do

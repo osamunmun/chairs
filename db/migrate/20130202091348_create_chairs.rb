@@ -5,11 +5,10 @@ class CreateChairs < ActiveRecord::Migration
       t.string :venues_name
       t.string :venues_image_url
       t.string :location
-      t.integer :num_checkin
+      t.integer :num_herenow
       t.integer :num_seats
       t.boolean :flg_full
-      t.string :last_update
-      end
+    end
   end
 
   def down
