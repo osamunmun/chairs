@@ -26,7 +26,14 @@
 % cd chairs
 % cp .env.sample .env #=> copy as .env
 % (edit .env for DEPLOY_USER, DEPLOY_HOST etc.)
-% bundle exec foreman run cap deploy #=> deploy to production (assets:precompile task is also called.)
-% (capistrano asks YOUR password for `sudo`)
-% bundle exec foreman run cap deploy:restart #=> unicorn is booted by foreman
+% bundle exec foreman run cap deploy #=> deploy to production (assets:precompile and unicorn:restart tasks are also called)
+(shortcut)
+% bundle exec foreman deploy
 ```
+
+#### unicorn tasks
+
+* unicorn:start
+* unicorn:stop
+* unicorn:reload
+* unicorn:restart
