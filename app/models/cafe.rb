@@ -1,3 +1,3 @@
 class Cafe < ActiveRecord::Base
-  attr_accessible :full, :herenow, :id, :image, :location, :name
+  attr_accessible :venue_id, :full, :herenow, :image, :location, :name
 end
