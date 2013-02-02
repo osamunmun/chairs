@@ -35,13 +35,15 @@ def create_http_client
 end 
 
 def get_venues()
-  response = @http.get("/v2/venues/search?ll=35.60,139.73&client_id=#{FOURSQUARE_CLIENT_ID}&client_secret=#{FOURSQUARE_CLIENT_SECRET}&v=20130119&query=starbucks")
+  today = Time.now.strftime("%Y%m%d")
+  response = @http.get("/v2/venues/search?ll=35.60,139.73&client_id=#{FOURSQUARE_CLIENT_ID}&client_secret=#{FOURSQUARE_CLIENT_SECRET}&v=#{today}&query=starbucks")
   json = JSON.parser.new(response.body)
   hash = json.parse()
 end
 
 def get_herenow(id)
-  response = @http.get("/v2/venues/#{id}/herenow?oauth_token=#{OAUTHTOKEN}")
+  time_hour_ago = (Time.now - 3600).to_i
+  response = @http.get("/v2/venues/#{id}/herenow?oauth_token=#{OAUTHTOKEN}&afterTimestamp=#{time_hour_ago}")
   json = JSON.parser.new(response.body)
   hash = json.parse()
   hash['response']['hereNow']['count']
