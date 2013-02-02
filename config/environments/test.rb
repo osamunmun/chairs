@@ -34,4 +34,7 @@ Chairs::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # time zone
+  config.time_zone = 'Tokyo'
 end
