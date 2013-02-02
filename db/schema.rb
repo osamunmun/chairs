@@ -11,17 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130202070003) do
+ActiveRecord::Schema.define(:version => 20130202091348) do
 
   create_table "chairs", :force => true do |t|
     t.string  "venues_id"
     t.string  "venues_name"
     t.string  "venues_image_url"
     t.string  "location"
-    t.integer "num_checkin"
+    t.integer "num_herenow"
     t.integer "num_seats"
     t.boolean "flg_full"
-    t.string  "last_update"
   end
 
 end
