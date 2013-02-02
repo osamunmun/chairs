@@ -1,0 +1,19 @@
+%ul.ui-listview{:data => {:role => 'listview', :filter => 'true'}}
+  :ruby
+    data = {
+      :corners    => 'false',
+      :shadow     => 'false',
+      :wrapperels => 'div',
+      :theme      => 'c',
+    }
+  - @cafes.each do |cafe|
+    %li.ui-btn.ui-li.ui-btn-icon-right.ui-li-has-thumb.ui-li-has-count.ui-btn-up-c{:data => data}
+      .ui-btn-inner.ui-li
+        .ui-btn-text
+          - text = capture_haml do
+            %h3.ui-li-heading= cafe.name
+            %p.ui-li-desc=     cafe.location
+            %span.ui-li-count= cafe.herenow
+          :ruby
+            row = image_tag('rails.png', :size => '80x80', :class => 'ui-li-thumb') + text
+          = link_to row, '#', :class => 'ui-link-inherit'

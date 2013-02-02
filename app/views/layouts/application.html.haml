@@ -9,23 +9,37 @@
     = stylesheet_link_tag "application", :media => "all"
     %link(href="favicon.ico" rel="shortcut icon")
 
-
   %body
-    .container-fluid
-      .row-fluid
-        .span2
-          %ul.nav.nav-tabs.nav-stacked
-            %li= link_to "Home",     "/"
-            %li= link_to "nearby",   "/"
-            %li= link_to "settings", "/"
-            %li= link_to "help",     "/"
-        .span10
-          =yield
+    #main{:data => {:role=> 'page'}}
+      #header.ui-header{:data => {:role => 'header'}}
+        %h1 Chairs
+        = link_to 'Refresh', '/', 'data-icon' => 'refresh', 'class' => 'ui-btn-left'
+      #content.ui-content{:data => {:role => 'content'}}
+        = yield
+      #footer.ui-footer{:data => {:role => 'footer'}}
+        %div{:data => {:role => 'navbar'}}
+          - btn_class = 'ui-btn ui-btn-inline ui-btn-icon-top ui-btn-up-a'
+          %ul
+            %li
+              - inner_span = capture_haml do
+                %span.ui-btn-text About
+              - opts = {:data => {:iconpos => 'top', :icon => 'info', :theme => 'a'}, :class => btn_class}
+              = link_to inner_span, '/', opts
+            %li
+              - inner_span = capture_haml do
+                %span.ui-btn-text Source
+              - opts = {:data => {:iconpos => 'top', :icon => 'star', :theme => 'a'}, :class => btn_class}
+              = link_to inner_span, 'http://github.com/osamunmun/chairs', opts
+            %li
+              - inner_span = capture_haml do
+                %span.ui-btn-text Settings
+              - opts = {:data => {:iconpos => 'top', :icon => 'gear', :theme => 'a'}, :class => btn_class}
+              = link_to inner_span, '/', opts
 
-      %footer
-        %p
-    /
-      Javascripts
-      \==================================================
-    / Placed at the end of the document so the pages load faster
     = javascript_include_tag "application"
+    / for unexpected class :(
+    :javascript
+      $('#main').bind('pageinit', function(){
+        $('li').removeClass('ui-li-static');
+        $('.ui-btn-inner').removeClass('ui-li-static').removeClass('ui-btn-up-c');
+      });

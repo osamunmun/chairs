@@ -1,6 +1,8 @@
 Chairs::Application.routes.draw do
 
-  root :to => 'home#index'
+  get "cafes/index"
+
+  root :to => 'cafes#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
