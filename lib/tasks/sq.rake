@@ -13,6 +13,7 @@ namespace :sq do
     @http = create_http_client
     @venues = get_venues()
   end
+
   desc "forsquareからhereNowを取得する"
   task :herenow => [:venue] do
     @venues['response']['venues'].to_a.each {|venue|
