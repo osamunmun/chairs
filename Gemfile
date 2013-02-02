@@ -28,4 +28,5 @@ group :development do
   gem 'sqlite3'
   gem 'pry'
   gem 'rspec'
+  gem 'rspec-rails'
 end
