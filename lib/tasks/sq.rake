@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'net/https'
 require 'json'
+require 'rake'
 
 FOURSQUARE_CLIENT_ID = "#{ENV['FOURSQUARE_CLIENT_ID']}"
 FOURSQUARE_CLIENT_SECRET = "#{ENV['FOURSQUARE_CLIENT_SECRET']}"
@@ -24,6 +25,10 @@ namespace :sq do
         puts "#{name}  #{herenow_count}"
       end
     }
+  end
+  
+  desc "満席かどうかを判定する"
+  task :chair => [:herenow] do
   end
 end 
 
