@@ -2,7 +2,6 @@
 require 'net/https'
 require 'json'
 require 'rake'
-require 'pry'
 
 FOURSQUARE_CLIENT_ID = "#{ENV['FOURSQUARE_CLIENT_ID']}"
 FOURSQUARE_CLIENT_SECRET = "#{ENV['FOURSQUARE_CLIENT_SECRET']}"
