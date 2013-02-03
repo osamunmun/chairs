@@ -1,0 +1,57 @@
+
+= Guard::Migrate
+
+{<img src="https://secure.travis-ci.org/glanotte/guard-migrate.png" />}[http://travis-ci.org/glanotte/guard-migrate]
+
+Migrate guard allows you to keep you migrations up to date while developing without needing to rerun them every time. I developed it because when I am first working out a project, the schema can change several times and this saves me several downs/ups/resets.
+
+- This should be compatible with 2.x rails, but has only currently been tested on 3.x rails.
+
+= Install
+
+Please be sure to have {Guard}[https://github.com/guard/guard] installed before continue.
+
+Install the gem:
+
+    gem install guard-migrate
+
+Add it to your Gemfile (inside test group):
+
+    gem 'guard-migrate'
+
+Add guard definition to your Guardfile by running this command:
+
+    guard init migrate
+
+== Options
+
+Available options:
+
+* :run_on_start - this will run the migration task when you start, reload or run all. Defaults to false. If reset is set to true with this, then it will run a reset on the start, reload, run all instead of just a regular migrate
+* :test_clone - this will run the with the additional `db:test:clone` to update the test database. Defaults to true.
+* :reset - this will run `rake db:migrate:reset` every time migrate is run. Defaults to false.
+* :rails_env - passing this will add "RAILS_ENV=" together with the environment.
+* :seed - setting this option to true will run seed after migrations. This will also run after test:clone if that is set to run. Defaults to false.
+
+== Todos
+
+* move the customized code to a separate class/module.
+
+== Contributing to guard-migrate
+ 
+* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
+* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
+* Fork the project
+* Start a feature/bugfix branch
+* Commit and push until you are happy with your contribution
+* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
+* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+== Authors
+
+{Geoff Lanotte}[https://github.com/glanotte]
+== Copyright
+
+Copyright (c) 2011 Geoff Lanotte. See LICENSE.txt for
+further details.
+

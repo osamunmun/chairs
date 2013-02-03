@@ -19,7 +19,7 @@ group :production do
   gem 'haml'
 end
 
-group :development do
+group :development, :test do
   gem 'thin'
   gem 'capistrano'
   gem 'capistrano-ext'
@@ -29,4 +29,13 @@ group :development do
   gem 'pry'
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'growl'
+  gem 'guard-rails'
+  gem 'guard-bundler'
+  gem 'guard-migrate'
+  gem 'guard-spork'
+  gem 'guard-rspec'
+  gem 'guard-cucumber'
+  gem 'database_cleaner'
+  gem 'rb-inotify', '~> 0.8.8'
 end
