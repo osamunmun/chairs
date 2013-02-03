@@ -2,6 +2,7 @@
 require 'net/https'
 require 'json'
 require 'rake'
+require 'pry'
 
 FOURSQUARE_CLIENT_ID = "#{ENV['FOURSQUARE_CLIENT_ID']}"
 FOURSQUARE_CLIENT_SECRET = "#{ENV['FOURSQUARE_CLIENT_SECRET']}"
@@ -37,17 +38,17 @@ namespace :sq do
   task :herenow => [:venue, :environment] do
     Cafe.all.each {|cafe|
       begin
-        herenow_count = get_herenow(cafe['id'])
+        herenow = get_herenow(cafe['venue_id'])
+        Herenow.create(:herenow => herenow, :venue_id => cafe['venue_id'])
       rescue 
         puts "Failed to get herenow!"
       end
-      cafe.update_attributes(:herenow => herenow_count)
-      puts "Failed to update DB record" if !cafe.save
     }
   end
   
   desc "満席かどうかを判定する"
   task :chair => [:herenow, :environment] do
+    venue_ids = Cafe.find(:all, :select => "venue_id")
   end
 end 
 

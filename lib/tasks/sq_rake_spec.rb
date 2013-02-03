@@ -21,4 +21,19 @@ describe 'Test Rake Forsquare Tasks' do
       }
     end
   end
+  context "herenowが実行された場合" do
+    before do
+      @expected = Hash.new
+      venue_ids = Cafe.all
+      venue_ids.each{|venue|
+        @expected["#{venue['venue_id']}"] = venue['updated_at']
+      }
+      @rake["sq:venue"].execute
+    end
+    it "venue should be updated" do 
+      @expected.each{|updated|
+        updated['updated_at'] != Herenow.find_by_venue_id(updated.key)['updated_at']
+      }
+    end
+  end
 end

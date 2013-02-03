@@ -27,6 +27,7 @@ group :development, :test do
   gem 'haml-rails'
   gem 'sqlite3'
   gem 'pry'
+  gem 'pry-debugger'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'growl'
