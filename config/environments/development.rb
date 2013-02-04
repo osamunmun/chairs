@@ -38,3 +38,6 @@ Chairs::Application.configure do
   # time zone
   config.time_zone = 'Tokyo'
 end
+
+# for stdout via foreman
+$stdout.sync = true
