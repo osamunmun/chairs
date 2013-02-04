@@ -13,28 +13,35 @@
     #main{:data => {:role=> 'page'}}
       #header.ui-header{:data => {:role => 'header'}}
         %h1 Chairs
-        = link_to 'Refresh', '/', 'data-icon' => 'refresh', 'class' => 'ui-btn-left'
+        :ruby
+          refresh_opts = {
+            'data-icon' => 'refresh',
+            'class'     => 'ui-btn-left',
+            'onclick'   => 'location.reload(true);',
+          }
+        = link_to 'Refresh', '/', refresh_opts
       #content.ui-content{:data => {:role => 'content'}}
         = yield
       #footer.ui-footer{:data => {:role => 'footer'}}
         %div{:data => {:role => 'navbar'}}
           - btn_class = 'ui-btn ui-btn-inline ui-btn-icon-top ui-btn-up-a'
+          - link_opts = {:data => {:iconpos => 'top', :theme => 'a'}, :class => btn_class}
           %ul
             %li
               - inner_span = capture_haml do
+                %span.ui-btn-text Home
+              - link_opts[:data][:icon] = 'home'
+              = link_to inner_span, '/', link_opts
+            %li
+              - inner_span = capture_haml do
                 %span.ui-btn-text About
-              - opts = {:data => {:iconpos => 'top', :icon => 'info', :theme => 'a'}, :class => btn_class}
-              = link_to inner_span, '/', opts
+              - link_opts[:data][:icon] = 'info'
+              = link_to inner_span, '/about', link_opts
             %li
               - inner_span = capture_haml do
                 %span.ui-btn-text Source
-              - opts = {:data => {:iconpos => 'top', :icon => 'star', :theme => 'a'}, :class => btn_class}
-              = link_to inner_span, 'http://github.com/osamunmun/chairs', opts
-            %li
-              - inner_span = capture_haml do
-                %span.ui-btn-text Settings
-              - opts = {:data => {:iconpos => 'top', :icon => 'gear', :theme => 'a'}, :class => btn_class}
-              = link_to inner_span, '/', opts
+              - link_opts[:data][:icon] = 'star'
+              = link_to inner_span, 'http://github.com/osamunmun/chairs', link_opts
 
     = javascript_include_tag "application"
     / for unexpected class :(

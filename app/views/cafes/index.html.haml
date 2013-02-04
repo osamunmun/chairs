@@ -13,7 +13,7 @@
           - text = capture_haml do
             %h3.ui-li-heading= cafe.name
             %p.ui-li-desc=     cafe.location
-            %span.ui-li-count= cafe.herenow
+            %span.ui-li-count= (cafe.now ||= 0)
           :ruby
             row = image_tag('cafe_logo.png', :size => '80x80', :class => 'ui-li-thumb') + text
           = link_to row, '#', :class => 'ui-link-inherit'
