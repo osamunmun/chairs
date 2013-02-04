@@ -17,6 +17,7 @@ namespace :sq do
       cafes = get_cafes()
     rescue 
       puts "Failed to get cafes!"
+      return
     end
     cafes['response']['venues'].to_a.each {|cafe|
       if cafe['name'].include?("大井町") || cafe['name'].include?("品川")
