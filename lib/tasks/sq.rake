@@ -44,19 +44,35 @@ namespace :sq do
       end
     }
   end
-  
+
   desc "満席かどうかを判定する"
-  task :chair => [:herenow, :environment] do
-    venue_ids = Cafe.find(:all, :select => "venue_id")
+  task :chair => [:environment] do
+    latest = {}
+    task = Rake::Task['sq:herenow'].invoke.first
+    task.call.collect{|h| latest[h.vid] = h.now }
+    unless latest.empty?
+      Herenow.recent_max_checkin_counts.each_pair do |vid, max|
+        if max < 2 # very few checkin counts :(
+          rate = 0
+        else
+          now = latest[vid].to_i
+          rate = (now.to_f / max.to_f * 100).to_i
+        end
+        cafe = Cafe.find_by_venue_id(vid)
+        cafe.full = (rate >= 80 ? true : false)
+        puts "%s : %s" % [vid, (cafe.full ? 'Y' : 'N')]
+        puts "Failed to save" unless cafe.save
+      end
+    end
   end
-end 
+end
 
 def create_http_client
   http = Net::HTTP.new('api.foursquare.com', 443)
   http.use_ssl = true
   http.verify_mode = OpenSSL::SSL::VERIFY_NONE
   http
-end 
+end
 
 def get_cafes()
   today = TIMENOW.strftime("%Y%m%d")
