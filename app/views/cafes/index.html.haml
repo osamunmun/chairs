@@ -7,13 +7,17 @@
       :theme      => 'c',
     }
   - @cafes.each do |cafe|
-    %li.ui-btn.ui-li.ui-btn-icon-right.ui-li-has-thumb.ui-li-has-count.ui-btn-up-c{:data => data}
+    %li.ui-btn.ui-li.ui-btn-icon-right.ui-li-has-thumb.ui-li-has-count{:data => data}
       .ui-btn-inner.ui-li
         .ui-btn-text
           - text = capture_haml do
             %h3.ui-li-heading= cafe.name
             %p.ui-li-desc=     cafe.location
-            %span.ui-li-count= (cafe.now ||= 0)
+          %span.right
+            - if cafe.full?
+              = image_tag('full.png', :size => '60x60', :class => 'icon')
+            - else
+              = image_tag('ok.png', :size => '60x60', :class => 'icon')
           :ruby
-            row = image_tag('cafe_logo.png', :size => '80x80', :class => 'ui-li-thumb') + text
+            row = image_tag('cafe_logo.png', :size => '65x65', :class => 'ui-li-thumb') + text
           = link_to row, '#', :class => 'ui-link-inherit'

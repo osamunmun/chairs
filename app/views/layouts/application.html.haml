@@ -46,7 +46,7 @@
     = javascript_include_tag "application"
     / for unexpected class :(
     :javascript
-      $('#main').bind('pageinit', function(){
+      $('#main').live('pageinit', function(e){
         $('li').removeClass('ui-li-static');
         $('.ui-btn-inner').removeClass('ui-li-static').removeClass('ui-btn-up-c');
       });

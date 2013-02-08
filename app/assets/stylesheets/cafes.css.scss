@@ -1,3 +1,26 @@
 // Place all the styles related to the cafes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// jQuery Mobile
+.ui-li-heading {
+  font-size: 10px;
+}
+.ui-li-thumb {
+  margin: 10px 0 0 3px;
+}
+.ui-li-has-thumb .ui-btn-inner a.ui-link-inherit,
+.ui-li-static.ui-li-has-thumb {
+  padding-left: 75px;
+}
+
+// original
+.right {
+  position: absolute;
+  right:    3px;
+  top:      12px;
+  .icon {
+    margin: 0;
+    border: 0;
+  }
+}
