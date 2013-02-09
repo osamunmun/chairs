@@ -10,5 +10,5 @@ handler do |job|
   end
 end
 
-every(10.minutes,'chair')
+every(3.minutes,'chair')
 every(1.days,'clean', :at => '00:00')
