@@ -61,7 +61,7 @@ namespace :sq do
         end
         cafe = Cafe.find_by_venue_id(vid)
         cafe.full = (rate >= 80 ? true : false)
-        cafe.now = now
+        cafe.herenow = now
         puts "%s : %s" % [vid, (cafe.full ? 'Y' : 'N')]
         puts "Failed to save" unless cafe.save
       end
