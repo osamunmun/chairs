@@ -53,10 +53,10 @@ namespace :sq do
     task.call.collect{|h| latest[h.vid] = h.now }
     unless latest.empty?
       Herenow.recent_max_checkin_counts.each_pair do |vid, max|
+        now = latest[vid].to_i
         if max < 2 # very few checkin counts :(
           rate = 0
         else
-          now = latest[vid].to_i
           rate = (now.to_f / max.to_f * 100).to_i
         end
         cafe = Cafe.find_by_venue_id(vid)
