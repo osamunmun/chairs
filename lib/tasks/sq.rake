@@ -36,15 +36,16 @@ namespace :sq do
 
   desc "forsquareからhereNowを取得する"
   task :herenow => [:venue, :environment] do
-    Cafe.all.each {|cafe|
+    Cafe.all.map {|cafe|
+      venue_id = cafe['venue_id']
+      herenow  = nil
       begin
-        herenow = get_herenow(cafe['venue_id'])
-        Herenow.create(:herenow => herenow, :venue_id => cafe['venue_id'])
-      rescue 
-        puts "Failed to get herenow!"
-      ensure
-        cafe.herenow = herenow || 0
+        herenow = get_herenow(venue_id)
+        Herenow.create(:herenow => herenow, :venue_id => venue_id)
+      rescue StandardError => err
+        puts "Failed to create herenow!"
       end
+      {:vid => venue_id, :now => (herenow||0)}
     }
   end
 
@@ -52,7 +53,7 @@ namespace :sq do
   task :chair => [:environment] do
     latest = {}
     task = Rake::Task['sq:herenow'].invoke.first
-    task.call.collect{|c| latest[c.vid] = c.now }
+    task.call.collect{|u| latest[u[:vid]] = u[:now]}
     unless latest.empty?
       Herenow.recent_max_checkin_counts.each_pair do |vid, max|
         now = latest[vid].to_i
@@ -95,5 +96,9 @@ def get_herenow(id)
   raise if !response = @http.get("/v2/venues/#{id}/herenow?oauth_token=#{OAUTHTOKEN}&afterTimestamp=#{time_hour_ago}&v=20130207")
   json = JSON.parser.new(response.body)
   hash = json.parse()
-  hash['response']['hereNow']['count']
+  if response.code == '200'
+    hash['response']['hereNow']['count']
+  else
+    0
+  end
 end
