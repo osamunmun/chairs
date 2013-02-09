@@ -66,6 +66,11 @@ namespace :sq do
       end
     end
   end
+
+  desc "Remove old herenow records"
+  task :clean => [:environment] do 
+    Herenow.delete(Herenow.remove_old_herenow)
+  end
 end
 
 def create_http_client
