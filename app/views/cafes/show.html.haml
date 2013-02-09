@@ -1,0 +1,9 @@
+- if @cafe
+  %p Map here ...
+  %ul
+    %li= "Name: "     + @cafe.name
+    %li= "Location: " + @cafe.location
+    %li= "Herenow: "  + @cafe.now.to_s
+  %a.ui-btn.ui-btn-inline.ui-btn-corner-all.ui-btn-up-c{:data => {:role => :button, :inline => 'true'}}
+    %span.ui-btn-inner
+      Checkin

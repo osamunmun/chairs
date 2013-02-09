@@ -7,7 +7,7 @@
     %title= content_for?(:title) ? yield(:title) : "Chairs"
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
-    %link(href="favicon.ico" rel="shortcut icon")
+    %link(href="/favicon.ico" rel="shortcut icon")
 
   %body
     #main{:data => {:role=> 'page'}}
@@ -50,3 +50,4 @@
         $('li').removeClass('ui-li-static');
         $('.ui-btn-inner').removeClass('ui-li-static').removeClass('ui-btn-up-c');
       });
+    = yield :javascript
