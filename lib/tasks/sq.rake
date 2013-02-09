@@ -52,7 +52,7 @@ namespace :sq do
   task :chair => [:environment] do
     latest = {}
     task = Rake::Task['sq:herenow'].invoke.first
-    task.call.collect{|h| latest[h.vid] = h.now }
+    task.call.collect{|c| latest[c.vid] = c.now }
     unless latest.empty?
       Herenow.recent_max_checkin_counts.each_pair do |vid, max|
         now = latest[vid].to_i

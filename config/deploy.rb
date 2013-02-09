@@ -89,19 +89,6 @@ after "deploy:start",          "unicorn:start"
 after "deploy:stop",           "unicorn:stop"
 after "deploy:restart",        "unicorn:restart"
 
-# assets
-namespace :assets do
-  desc 'run rake assets:precompile'
-  task :precompile, :roles => :web do
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:precompile"
-  end
-  desc 'run rake assets:clean'
-  task :cleanup, :roles => :web do
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean"
-  end
-end
-#after :deploy, "assets:precompile"
-
 # helper
 def remote_file_exist?(path)
   'true' == capture("if [ -e #{path} ]; then echo 'true'; fi").strip
