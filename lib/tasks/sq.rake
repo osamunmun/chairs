@@ -42,6 +42,8 @@ namespace :sq do
         Herenow.create(:herenow => herenow, :venue_id => cafe['venue_id'])
       rescue 
         puts "Failed to get herenow!"
+      ensure
+        cafe.herenow = herenow || 0
       end
     }
   end
