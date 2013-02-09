@@ -84,7 +84,7 @@ end
 
 def get_herenow(id)
   time_hour_ago = (TIMENOW - 3600).to_i
-  raise if !response = @http.get("/v2/venues/#{id}/herenow?oauth_token=#{OAUTHTOKEN}&afterTimestamp=#{time_hour_ago}")
+  raise if !response = @http.get("/v2/venues/#{id}/herenow?oauth_token=#{OAUTHTOKEN}&afterTimestamp=#{time_hour_ago}&v=20130207")
   json = JSON.parser.new(response.body)
   hash = json.parse()
   hash['response']['hereNow']['count']
