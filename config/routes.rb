@@ -1,7 +1,9 @@
 Chairs::Application.routes.draw do
 
   root :to => 'cafes#index'
-  match 'about' => 'pages#about'
+  match 'cafes.:format' => 'cafes#index'
+  match 'cafes/:id'     => 'cafes#show', :as => :show_cafe
+  match 'about'         => 'pages#about'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

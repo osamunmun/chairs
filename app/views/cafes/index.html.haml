@@ -20,4 +20,4 @@
               = image_tag('ok.png', :size => '60x60', :class => 'icon')
           :ruby
             row = image_tag('cafe_logo.png', :size => '65x65', :class => 'ui-li-thumb') + text
-          = link_to row, '#', :class => 'ui-link-inherit'
+          = link_to row, show_cafe_path(cafe.id), :class => 'ui-link-inherit'
