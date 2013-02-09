@@ -100,7 +100,7 @@ namespace :assets do
     run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake assets:clean"
   end
 end
-after :deploy, "assets:precompile"
+#after :deploy, "assets:precompile"
 
 # helper
 def remote_file_exist?(path)
