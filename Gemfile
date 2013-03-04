@@ -26,7 +26,7 @@ group :development, :test do
   gem 'capistrano-ext'
   gem 'capistrano_colors'
   gem 'haml-rails'
-  gem 'sqlite3'
+  gem 'mysql2'
   gem 'pry'
   gem 'pry-debugger'
   gem 'rspec'
